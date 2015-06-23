@@ -4,11 +4,18 @@ var EventEmitter = require('events').EventEmitter;
 var _ = require("lodash");
 var CHANGE_EVENT = 'change-bekkbok';
 
-var _blog = "tester";
+var _blog = {}
+var _title = "";
+var _content = "";
 
 
 function loadBlog(data) {
+    console.log(data);
+    console.log(data.title);
+    console.log(data.content);
     _blog = data;
+    _title = data.title;
+    _content = data.content;
 }
 
 function fetchFailed(error) {
@@ -20,6 +27,12 @@ function fetchFailed(error) {
 var BlogStore = _.extend({}, EventEmitter.prototype, {
     getBlog: function(){
         return _blog;
+    },
+    getBlogTitle: function() {
+        return _title;
+    },
+    getBlogContent: function() {
+        return _content;
     },
     emitChange: function() {
         this.emit(CHANGE_EVENT);

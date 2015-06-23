@@ -4,11 +4,11 @@ var BlogClient = require('../services/BlogClient');
 
 var BlogActions = {
 
-    fetch: function () {
+    fetch: function (id) {
         Dispatcher.dispatch({
             actionType: BlogConstants.BLOG_FETCH
         });
-        var blog = BlogClient.get();
+        var blog = BlogClient.getBlog(id);
         Dispatcher.dispatch({
             actionType: BlogConstants.BLOG_FETCH_SUCCESS,
             data: blog

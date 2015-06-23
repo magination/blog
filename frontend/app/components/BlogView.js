@@ -4,7 +4,8 @@ var BlogActions = require("../actions/BlogActions");
 
 function getState() {
     return {
-        blog: BlogStore.getBlog()
+        title: BlogStore.getBlogTitle(),
+        content: BlogStore.getBlogContent()
     };
 }
 
@@ -14,7 +15,7 @@ var BlogView = React.createClass({
     },
     componentDidMount: function() {
         BlogStore.addChangeListener(this._onChange);
-        BlogActions.fetch();
+        BlogActions.fetch(2);
     },
     componentWillUnmount: function() {
         BlogStore.removeChangeListener(this._onChange);
@@ -24,8 +25,8 @@ var BlogView = React.createClass({
     },
     render: function() {
         return <div>
-            <h1>{this.state.blog.title}</h1>
-            <p>{this.state.blog.content}</p>
+            <h1>{this.state.title}</h1>
+            <p>{this.state.content}</p>
         </div>
     }
 });

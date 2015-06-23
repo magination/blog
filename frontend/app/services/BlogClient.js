@@ -2,6 +2,11 @@ var request = require('superagent');
 //var requestHandler = require('./requestHandler');
 var Promise = require('bluebird');
 
+var blogOne = {'title': 'titelOne', 'content': 'the text for blog one'};
+var blogTwo = {'title': 'titelTwo', 'content': 'the text for blog two'};
+var blogThree = {'title': 'titelThree', 'content': 'the text for blog three'};
+var blogs = {1:  blogOne, 2: blogTwo, 3: blogThree};
+
 var BloggClient = {
     /*get: function () {
         return new Promise(function (resolve, reject) {
@@ -13,8 +18,8 @@ var BloggClient = {
                 });
         })
     }*/
-    get: function () {
-        return {'title': 'tittelen', 'content': 'the text'};
+    getBlog: function (id) {
+        return blogs[id];
     }
 };
 

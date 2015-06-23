@@ -5,11 +5,11 @@ var BlogClient = require('../services/BlogClient');
 
 var BlogActions = {
 
-    fetch: function () {
+    fetch: function (id) {
         Dispatcher.dispatch({
             actionType: BlogConstants.BLOG_FETCH
         });
-        var blog = BlogClient.get();
+        var blog = BlogClient.getBlog(id);
         Dispatcher.dispatch({
             actionType: BlogConstants.BLOG_FETCH_SUCCESS,
             data: blog
@@ -66,7 +66,8 @@ var BlogActions = require("../actions/BlogActions");
 
 function getState() {
     return {
-        blog: BlogStore.getBlog()
+        title: BlogStore.getBlogTitle(),
+        content: BlogStore.getBlogContent()
     };
 }
 
@@ -76,7 +77,7 @@ var BlogView = React.createClass({displayName: "BlogView",
     },
     componentDidMount: function() {
         BlogStore.addChangeListener(this._onChange);
-        BlogActions.fetch();
+        BlogActions.fetch(2);
     },
     componentWillUnmount: function() {
         BlogStore.removeChangeListener(this._onChange);
@@ -86,8 +87,8 @@ var BlogView = React.createClass({displayName: "BlogView",
     },
     render: function() {
         return React.createElement("div", null, 
-            React.createElement("h1", null, this.state.blog.title), 
-            React.createElement("p", null, this.state.blog.content)
+            React.createElement("h1", null, this.state.title), 
+            React.createElement("p", null, this.state.content)
         )
     }
 });
@@ -117,6 +118,11 @@ var request = require('superagent');
 //var requestHandler = require('./requestHandler');
 var Promise = require('bluebird');
 
+var blogOne = {'title': 'titelOne', 'content': 'the text for blog one'};
+var blogTwo = {'title': 'titelTwo', 'content': 'the text for blog two'};
+var blogThree = {'title': 'titelThree', 'content': 'the text for blog three'};
+var blogs = {1:  blogOne, 2: blogTwo, 3: blogThree};
+
 var BloggClient = {
     /*get: function () {
         return new Promise(function (resolve, reject) {
@@ -128,8 +134,8 @@ var BloggClient = {
                 });
         })
     }*/
-    get: function () {
-        return {'title': 'tittelen', 'content': 'the text'};
+    getBlog: function (id) {
+        return blogs[id];
     }
 };
 
@@ -142,11 +148,18 @@ var EventEmitter = require('events').EventEmitter;
 var _ = require("lodash");
 var CHANGE_EVENT = 'change-bekkbok';
 
-var _blog = "tester";
+var _blog = {}
+var _title = "";
+var _content = "";
 
 
 function loadBlog(data) {
+    console.log(data);
+    console.log(data.title);
+    console.log(data.content);
     _blog = data;
+    _title = data.title;
+    _content = data.content;
 }
 
 function fetchFailed(error) {
@@ -158,6 +171,12 @@ function fetchFailed(error) {
 var BlogStore = _.extend({}, EventEmitter.prototype, {
     getBlog: function(){
         return _blog;
+    },
+    getBlogTitle: function() {
+        return _title;
+    },
+    getBlogContent: function() {
+        return _content;
     },
     emitChange: function() {
         this.emit(CHANGE_EVENT);
