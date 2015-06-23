@@ -20,6 +20,9 @@ var BloggClient = {
     }*/
     getBlog: function (id) {
         return blogs[id];
+    },
+    getAllBlogs: function () {
+        return blogs;
     }
 };
 

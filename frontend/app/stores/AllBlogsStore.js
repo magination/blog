@@ -4,15 +4,11 @@ var EventEmitter = require('events').EventEmitter;
 var _ = require("lodash");
 var CHANGE_EVENT = 'change-bekkbok';
 
-var _blog = {}
-var _title = "";
-var _content = "";
+var _blogs = {}
 
 
 function loadBlog(data) {
-    _blog = data;
-    _title = data.title;
-    _content = data.content;
+    _blogs = data;
 }
 
 function fetchFailed(error) {
@@ -21,15 +17,9 @@ function fetchFailed(error) {
     _blog.errors.push(error);
 }
 
-var BlogStore = _.extend({}, EventEmitter.prototype, {
-    getBlog: function(){
-        return _blog;
-    },
-    getBlogTitle: function() {
-        return _title;
-    },
-    getBlogContent: function() {
-        return _content;
+var AllBlogsStore = _.extend({}, EventEmitter.prototype, {
+    getAllBlogs: function(){
+        return _blogs;
     },
     emitChange: function() {
         this.emit(CHANGE_EVENT);
@@ -42,18 +32,18 @@ var BlogStore = _.extend({}, EventEmitter.prototype, {
     }
 });
 
-BlogStore.dispatchToken = Dispatcher.register(function(action) {
+AllBlogsStore.dispatchToken = Dispatcher.register(function(action) {
     switch(action.actionType) {
-        case BlogConstants.BLOG_FETCH:
-            BlogStore.emitChange();
+        case BlogConstants.ALL_BLOG_FETCH:
+            AllBlogsStore.emitChange();
             break;
-        case BlogConstants.BLOG_FETCH_SUCCESS:
+        case BlogConstants.ALL_BLOG_FETCH_SUCCESS:
             loadBlog(action.data);
-            BlogStore.emitChange();
+            AllBlogsStore.emitChange();
             break;
-        case BlogConstants.BLOG_FETCH_FAIL:
+        case BlogConstants.ALL_BLOG_FETCH_FAIL:
             fetchFailed(action.error);
-            BlogStore.emitChange();
+            AllBlogsStore.emitChange();
             break;
         default:
     };
@@ -61,4 +51,4 @@ BlogStore.dispatchToken = Dispatcher.register(function(action) {
     return true;
 });
 
-module.exports = BlogStore;
+module.exports = AllBlogsStore;

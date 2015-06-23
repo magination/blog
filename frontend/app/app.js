@@ -1,6 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var BlogView = require('./components/BlogView');
+var FrontView = require('./components/FrontView');
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
@@ -17,7 +18,7 @@ var App = React.createClass({
 
 var routes = (
   	<Route handler={App}>
-		<DefaultRoute handler={BlogView}/>
+		<DefaultRoute handler={FrontView}/>
   	</Route>
 );
 

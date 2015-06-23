@@ -25,6 +25,16 @@ var BlogActions = {
                     error: error
                 });
             });*/
+    },
+    fetchAll: function () {
+        Dispatcher.dispatch({
+            actionType: BlogConstants.All_BLOGS_FETCH
+        });
+        var blogs = BlogClient.getAllBlogs();
+        Dispatcher.dispatch({
+            actionType: BlogConstants.ALL_BLOG_FETCH_SUCCESS,
+            data: blogs
+        });
     }
 };
 
