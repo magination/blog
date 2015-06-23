@@ -1,0 +1,20 @@
+var express         = require('express');
+//var mongoose        = require('mongoose');
+var bodyParser      = require('body-parser');
+var router          = require('./routes');
+//var passport        = require('passport');
+
+var app = express();
+
+//mongoose.connect('mongodb://localhost:27017/test');
+
+app.use(express.static(__dirname + '/frontend'));
+app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/', router);
+
+app.listen(3000, function() {
+    console.log('Running on port:3000');
+});
