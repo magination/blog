@@ -48,6 +48,7 @@
     "path": "^0.11.14",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
+    "slug": "^0.9.1",
     "superagent": "^0.21.0",
     "vinyl-source-stream": "^1.1.0",
     "yargs": "^3.10.0"
