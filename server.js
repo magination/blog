@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 baucis.rest('post');
 baucis.rest('user');
 app.use('/api', baucis());
