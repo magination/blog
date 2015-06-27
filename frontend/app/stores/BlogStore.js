@@ -6,13 +6,13 @@ var CHANGE_EVENT = 'change-bekkbok';
 
 var _blog = {}
 var _title = "";
-var _content = "";
+var _body = "";
 
 
 function loadBlog(data) {
     _blog = data;
     _title = data.title;
-    _content = data.content;
+    _body = data.body;
 }
 
 function fetchFailed(error) {
@@ -28,8 +28,8 @@ var BlogStore = _.extend({}, EventEmitter.prototype, {
     getBlogTitle: function() {
         return _title;
     },
-    getBlogContent: function() {
-        return _content;
+    getBlogBody: function() {
+        return _body;
     },
     emitChange: function() {
         this.emit(CHANGE_EVENT);

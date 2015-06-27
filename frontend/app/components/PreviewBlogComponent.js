@@ -5,7 +5,7 @@ var previewBlogComponent = React.createClass({
         return(
             <div className="blogPostPreview">
             <h2> {this.props.blogpost.title} </h2>
-            <p> {this.props.blogpost.content} </p>
+            <p> {this.props.blogpost.body} </p>
             </div>
         )
     }

@@ -8,12 +8,7 @@ var BlogActions = {
         Dispatcher.dispatch({
             actionType: BlogConstants.BLOG_FETCH
         });
-        var blog = BlogClient.getBlog(id);
-        Dispatcher.dispatch({
-            actionType: BlogConstants.BLOG_FETCH_SUCCESS,
-            data: blog
-        });
-        /*BlogClient.get()
+        BlogClient.getBlogPost(id)
             .then(function (data) {
                 Dispatcher.dispatch({
                     actionType: BlogConstants.BLOG_FETCH_SUCCESS,
@@ -24,7 +19,7 @@ var BlogActions = {
                     actionType: BlogConstants.BLOG_FETCH_FAIL,
                     error: error
                 });
-            });*/
+            });
     },
     fetchAll: function () {
         Dispatcher.dispatch({
@@ -35,6 +30,23 @@ var BlogActions = {
             actionType: BlogConstants.ALL_BLOG_FETCH_SUCCESS,
             data: blogs
         });
+    },
+    fetchAllClient: function () {
+        Dispatcher.dispatch({
+            actionType: BlogConstants.ALL_BLOG_FETCH
+        });
+        BlogClient.getAllBlogs()
+            .then(function (data) {
+                Dispatcher.dispatch({
+                    actionType: BlogConstants.ALL_BLOG_FETCH_SUCCESS,
+                    data: data
+                });
+            }, function (error) {
+                Dispatcher.dispatch({
+                    actionType: BlogConstants.BLOG_FETCH_FAIL,
+                    error: error
+                });
+            });
     }
 };
 

@@ -18,7 +18,7 @@ var App = React.createClass({
 
 var routes = (
   	<Route handler={App}>
-  		<Route path="/test/:id" handler={BlogPostView} />
+  		<Route path="/post/:id" handler={BlogPostView} />
 		<DefaultRoute handler={FrontView}/>
   	</Route>
 );

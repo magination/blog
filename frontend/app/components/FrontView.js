@@ -16,7 +16,7 @@ var FrontView = React.createClass({
     },
     componentDidMount: function() {
         AllBlogPostsStore.addChangeListener(this._onChange);
-        BlogActions.fetchAll();
+        BlogActions.fetchAllClient();
     },
     componentWillUnmount: function() {
         AllBlogPostsStore.removeChangeListener(this._onChange);
@@ -44,7 +44,6 @@ var FrontView = React.createClass({
         else{
             return(
             <div>
-            <h1>NOT LOADED</h1>
             </div>)
         }
     }

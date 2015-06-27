@@ -8,7 +8,7 @@ var Router = Router;
 function getState() {
     return {
         title: BlogStore.getBlogTitle(),
-        content: BlogStore.getBlogContent()
+        body: BlogStore.getBlogBody()
     };
 }
 
@@ -30,7 +30,7 @@ var BlogPostView = React.createClass({
     render: function() {
         return <div>
             <h1 className="blog-post-title">{this.state.title}</h1>
-            <p>{this.state.content}</p>
+            <p>{this.state.body}</p>
         </div>
     }
 });
