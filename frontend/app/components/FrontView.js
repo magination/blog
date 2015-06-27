@@ -1,10 +1,10 @@
 var React = require("react");
-var AllBlogsStore = require("../stores/AllBlogsStore");
+var AllBlogPostsStore = require("../stores/AllBlogPostsStore");
 var BlogActions = require("../actions/BlogActions");
 
 function getState() {
     return {
-        blogs: AllBlogsStore.getAllBlogs()
+        blogs: AllBlogPostsStore.getAllBlogs()
     };
 }
 
@@ -13,11 +13,11 @@ var BlogView = React.createClass({
         this.setState(getState());
     },
     componentDidMount: function() {
-        AllBlogsStore.addChangeListener(this._onChange);
+        AllBlogPostsStore.addChangeListener(this._onChange);
         BlogActions.fetchAll();
     },
     componentWillUnmount: function() {
-        AllBlogsStore.removeChangeListener(this._onChange);
+        AllBlogPostsStore.removeChangeListener(this._onChange);
     },
     getInitialState: function() {
         return  getState();

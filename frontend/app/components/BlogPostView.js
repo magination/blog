@@ -9,7 +9,7 @@ function getState() {
     };
 }
 
-var BlogView = React.createClass({
+var BlogPostView = React.createClass({
 	_onChange: function(){
         this.setState(getState());
     },
@@ -31,4 +31,4 @@ var BlogView = React.createClass({
     }
 });
 
-module.exports = BlogView;
+module.exports = BlogPostView;
