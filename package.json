@@ -1,11 +1,11 @@
 {
-  "name": "Magination",
+  "name": "magination",
   "version": "0.0.1",
   "description": "Magination",
-  "readme": "README.md",
   "main": "index.html",
   "scripts": {
-    "deploy": "gulp --production"
+    "deploy": "gulp --production",
+    "start": "node server.js"
   },
   "author": "Juul Arthur",
   "repository": {
@@ -47,5 +47,6 @@
     "superagent": "^0.21.0",
     "vinyl-source-stream": "^1.1.0",
     "yargs": "^3.10.0"
-  }
+  },
+  "license": "ISC"
 }
