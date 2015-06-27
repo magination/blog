@@ -25,7 +25,6 @@ var FrontView = React.createClass({
         return getState();
     },
     render: function() {
-
         if(this.state.blogs[0]){
             var previewList = [];
             for (var post in this.state.blogs) {
@@ -35,9 +34,11 @@ var FrontView = React.createClass({
                 return <PreviewBlogComponent key={key} blogpost={post}/>
             })
             return(
-            <div>
+            <div className="SiteContainer">
                 <h1>Magination Blog</h1>
+                <div className="postContainer">
                 {previewList}
+                </div>
             </div>
             )}
         else{
@@ -46,7 +47,6 @@ var FrontView = React.createClass({
             <h1>NOT LOADED</h1>
             </div>)
         }
-
     }
 });
 
