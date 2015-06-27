@@ -40,7 +40,7 @@ var initPosts = [
 Post.find().exec(function (err, posts){
     if (posts.length == 0){
       Post.create(initPosts, function (err) {
-        console.log(err);
+        if(err) return console.log(err);
       })
       console.log('Created initial posts');
     }
