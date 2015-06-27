@@ -1,6 +1,8 @@
 var React = require("react");
 var AllBlogPostsStore = require("../stores/AllBlogPostsStore");
 var BlogActions = require("../actions/BlogActions");
+var PreviewBlogComponent = require('./PreviewBlogComponent');
+var lodash = require('lodash');
 
 function getState() {
     return {
@@ -8,7 +10,7 @@ function getState() {
     };
 }
 
-var BlogView = React.createClass({
+var FrontView = React.createClass({
 	_onChange: function(){
         this.setState(getState());
     },
@@ -20,13 +22,32 @@ var BlogView = React.createClass({
         AllBlogPostsStore.removeChangeListener(this._onChange);
     },
     getInitialState: function() {
-        return  getState();
+        return getState();
     },
     render: function() {
-        return <div>
-            <h1>{this.state.blogs}</h1>
-        </div>
+
+        if(this.state.blogs[0]){
+            var previewList = [];
+            for (var post in this.state.blogs) {
+                previewList.push(this.state.blogs[post]);
+            }
+            previewList = lodash.map(previewList, function(post, key) {
+                return <PreviewBlogComponent key={key} blogpost={post}/>
+            })
+            return(
+            <div>
+                <h1>Magination Blog</h1>
+                {previewList}
+            </div>
+            )}
+        else{
+            return(
+            <div>
+            <h1>NOT LOADED</h1>
+            </div>)
+        }
+
     }
 });
 
-module.exports = BlogView;
+module.exports = FrontView;
