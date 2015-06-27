@@ -172,3 +172,6 @@ crashlytics-build.properties
 
 # sftp configuration file
 sftp-config.json
+
+##### PATHS
+/frontend/assets/
