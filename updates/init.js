@@ -1,5 +1,5 @@
-var Post = require('../models/Post');
-var User = require('../models/User');
+var Post = require('../models/post');
+var User = require('../models/user');
 var mongoose = require('mongoose');
 
 var initUser = new User({username:'test', password:'test'});
