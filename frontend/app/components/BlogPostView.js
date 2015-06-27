@@ -1,6 +1,9 @@
 var React = require("react");
 var BlogStore = require("../stores/BlogStore");
 var BlogActions = require("../actions/BlogActions");
+var Router = require('react-router');
+var Router = Router;
+
 
 function getState() {
     return {
@@ -10,12 +13,13 @@ function getState() {
 }
 
 var BlogPostView = React.createClass({
+    mixins: [ Router.State ],
 	_onChange: function(){
         this.setState(getState());
     },
     componentDidMount: function() {
         BlogStore.addChangeListener(this._onChange);
-        BlogActions.fetch(2);
+        BlogActions.fetch(this.getParams().id);
     },
     componentWillUnmount: function() {
         BlogStore.removeChangeListener(this._onChange);
@@ -25,7 +29,7 @@ var BlogPostView = React.createClass({
     },
     render: function() {
         return <div>
-            <h1>{this.state.title}</h1>
+            <h1 className="blog-post-title">{this.state.title}</h1>
             <p>{this.state.content}</p>
         </div>
     }
