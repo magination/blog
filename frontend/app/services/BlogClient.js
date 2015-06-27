@@ -2,10 +2,10 @@ var request = require('superagent');
 //var requestHandler = require('./requestHandler');
 var Promise = require('bluebird');
 
+var blogZero = {'title': 'titelZero', 'content': 'the text for blog zero'};
 var blogOne = {'title': 'titelOne', 'content': 'the text for blog one'};
 var blogTwo = {'title': 'titelTwo', 'content': 'the text for blog two'};
-var blogThree = {'title': 'titelThree', 'content': 'the text for blog three'};
-var blogs = {1:  blogOne, 2: blogTwo, 3: blogThree};
+var blogs = {0:  blogZero, 1: blogOne, 2: blogTwo};
 
 var BloggClient = {
     /*get: function () {

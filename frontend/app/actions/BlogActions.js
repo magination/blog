@@ -28,7 +28,7 @@ var BlogActions = {
     },
     fetchAll: function () {
         Dispatcher.dispatch({
-            actionType: BlogConstants.All_BLOGS_FETCH
+            actionType: BlogConstants.ALL_BLOG_FETCH
         });
         var blogs = BlogClient.getAllBlogs();
         Dispatcher.dispatch({
