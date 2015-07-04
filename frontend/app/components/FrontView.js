@@ -1,4 +1,6 @@
 var React = require("react");
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
 var AllBlogPostsStore = require("../stores/AllBlogPostsStore");
 var BlogActions = require("../actions/BlogActions");
 var PreviewBlogComponent = require('./PreviewBlogComponent');
@@ -37,6 +39,8 @@ var FrontView = React.createClass({
             <div className="SiteContainer">
                 <h1>Magination Blog</h1>
                 <div className="postContainer">
+                <Link to={"/"} className="create-blog-link">Create blog post</Link>
+                <div className="clear-both" />
                 {previewList}
                 </div>
             </div>

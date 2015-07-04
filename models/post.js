@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var baucis = require('baucis');
 var slug = require('slug')
 
 
