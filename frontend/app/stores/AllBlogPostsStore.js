@@ -2,7 +2,7 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var BlogConstants = require('../constants/BlogConstants');
 var EventEmitter = require('events').EventEmitter;
 var _ = require("lodash");
-var CHANGE_EVENT = 'change-bekkbok';
+var CHANGE_EVENT = 'change-allblogposts';
 
 var _blogs = {}
 

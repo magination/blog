@@ -39,7 +39,7 @@ var FrontView = React.createClass({
             <div className="SiteContainer">
                 <h1>Magination Blog</h1>
                 <div className="postContainer">
-                <Link to={"/"} className="create-blog-link">Create blog post</Link>
+                <Link to={"/admin"} className="create-blog-link">Create blog post</Link>
                 <div className="clear-both" />
                 {previewList}
                 </div>
