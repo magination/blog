@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-var baucis = require('baucis');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var Promise = require('bluebird');
 Promise.promisifyAll(bcrypt);
 var userSchema = new mongoose.Schema({

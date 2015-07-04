@@ -9,6 +9,7 @@ var middleware = require('./middleware');
 
 module.exports = function(app){
   baucis.rest('post')
+  .findBy('slug')
   .request('collection','head post put delete', middleware.requireUser)
   .query(function(req,res,next){
     req.baucis.query.populate('author', '-password')
@@ -26,10 +27,10 @@ module.exports = function(app){
     res.redirect('/');
   });
 
+  app.use('/api', baucis());
+
   router.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
   });
-
-  app.use('/api', baucis());
   return router;
 };
