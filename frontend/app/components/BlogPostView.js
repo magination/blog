@@ -33,6 +33,7 @@ var BlogPostView = React.createClass({
             <h1 className="blog-post-title">{this.state.title}</h1>
             <h2> Written by: {this.state.author} </h2>
             <p>{this.state.body}</p>
+            <textarea id="showContent" value={this.state.body}></textarea>
         </div>
     }
 });

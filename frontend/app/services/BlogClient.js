@@ -29,6 +29,16 @@ var BloggClient = {
                 });
         })
     },
+    saveBlogPost: function (post) {
+        return new Promise(function (resolve, reject) {
+            request
+                .post('/api/posts/', post)
+                .on('error', requestHandler.error(reject))
+                .end(function(err, res){
+                    requestHandler.response(resolve, reject, err, res)
+                });
+        })
+    }
 };
 
 module.exports = BloggClient;

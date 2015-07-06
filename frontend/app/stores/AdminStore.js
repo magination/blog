@@ -4,7 +4,16 @@ var EventEmitter = require('events').EventEmitter;
 var _ = require("lodash");
 var CHANGE_EVENT = 'change-admin';
 
+_feedback = "";
+
+function setFeedback(data) {
+    _feedback = data;
+}
+
 var BlogStore = _.extend({}, EventEmitter.prototype, {
+    getFeedback: function() {
+        return this.feedback;
+    },
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     },
@@ -18,15 +27,15 @@ var BlogStore = _.extend({}, EventEmitter.prototype, {
 
 BlogStore.dispatchToken = Dispatcher.register(function(action) {
     switch(action.actionType) {
-        case BlogConstants.BLOG_FETCH:
+        case BlogConstants.BLOG_POST_SAVE:
             BlogStore.emitChange();
             break;
-        case BlogConstants.BLOG_FETCH_SUCCESS:
+        case BlogConstants.BLOG_POST_SAVE_SUCCESS:
+            setFeedback(action.data);
             BlogStore.emitChange();
             break;
-        case BlogConstants.BLOG_FETCH_FAIL:
-            fetchFailed(action.error);
-            BlogStore.emitChange();
+        case BlogConstants.BLOG_POST_SAVE_FAIL:
+            BlogStore.emitChange(action.error);
             break;
         default:
     };
