@@ -27,17 +27,9 @@ var AdminView = React.createClass({
     },
     savePost: function(e) {
         e.preventDefault();
-        console.log(e.target.title.value);
-        console.log(e.target.content.value);
         AdminActions.savePost({title: e.target.title.value, body: e.target.content.value, author: '558ebbafa59d66a0056f5abf'});
     },
     render: function() {
-        var editorStyle = {
-            overflow: 'auto',
-            width: 300,
-            height: 100,
-            maxHeight: 100
-        }
         return (
             <div>
                 <h1>Admin</h1>
