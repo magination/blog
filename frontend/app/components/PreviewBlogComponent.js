@@ -7,7 +7,8 @@ var previewBlogComponent = React.createClass({
         return(
             <div className="blogPostPreview">
                 <h2> <Link to={`/post/${this.props.blogpost.slug}`}>{this.props.blogpost.title} </Link> </h2>
-                <div className="author"><p> Written by: <span className="authorName"> Juul Arthur </span> </p></div>
+                //If there is no user, a testuser is displayed. Should throw an error when system is in prod
+                <div className="author"><p> Written by: <span className="authorName"> {this.props.blogpost.author ? this.props.blogpost.author.username : "Magination"} </span> </p></div>
                 <p> {this.props.blogpost.body} </p>
                 <Link to={`/post/${this.props.blogpost.slug}`}><button name="readMoreButton">Read more</button></Link>
             </div>
