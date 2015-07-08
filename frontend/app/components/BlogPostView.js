@@ -8,7 +8,8 @@ var Router = Router;
 function getState() {
     return {
         title: BlogStore.getBlogTitle(),
-        body: BlogStore.getBlogBody()
+        body: BlogStore.getBlogBody(),
+        author: BlogStore.getAuthor()
     };
 }
 
@@ -30,6 +31,7 @@ var BlogPostView = React.createClass({
     render: function() {
         return <div>
             <h1 className="blog-post-title">{this.state.title}</h1>
+            <h2> Written by: {this.state.author} </h2>
             <p>{this.state.body}</p>
         </div>
     }
