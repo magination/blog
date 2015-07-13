@@ -1,10 +1,11 @@
 var React = require('react');
 var Router = require('react-router');
-var BlogPostView = require('./components/BlogPostView');
-var FrontView = require('./components/FrontView');
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
+var BlogPostView = require('./components/BlogPostView');
+var FrontView = require('./components/FrontView');
+var AdminView = require('./components/AdminView');
 
 var App = React.createClass({
 	render: function(){
@@ -18,6 +19,7 @@ var App = React.createClass({
 
 var routes = (
   	<Route handler={App}>
+  		<Route path="/admin" handler={AdminView} />
   		<Route path="/post/:id" handler={BlogPostView} />
 		<DefaultRoute handler={FrontView}/>
   	</Route>

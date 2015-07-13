@@ -10,7 +10,7 @@ var middleware = require('./middleware');
 module.exports = function(app){
   baucis.rest('post')
   .findBy('slug')
-  .request('collection','head post put delete', middleware.requireUser)
+  /*.request('collection','head post put delete', middleware.requireUser) */
   .query(function(req,res,next){
     req.baucis.query.populate('author', '-password')
     next();

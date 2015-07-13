@@ -32,7 +32,7 @@ var BlogPostView = React.createClass({
         return <div>
             <h1 className="blog-post-title">{this.state.title}</h1>
             <h2> Written by: {this.state.author} </h2>
-            <p>{this.state.body}</p>
+            <div dangerouslySetInnerHTML={{__html: this.state.body}}/>
         </div>
     }
 });
