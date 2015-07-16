@@ -7,7 +7,7 @@ var AdminActions = require('../actions/AdminActions')
 
 function getState() {
     return {
-        feedback: AdminStore.getFeedback,
+        feedback: AdminStore.getFeedback(),
         conten: ""
     };
 };
@@ -21,32 +21,17 @@ var AdminView = React.createClass({
         return {feedback: '', content: ''};
     },
     componentDidMount: function() {
+        this.initTinyMCE();
+
         AdminStore.addChangeListener(this._onChange);
     },
     componentWillUnmount: function() {
         AdminStore.removeChangeListener(this._onChange);
     },
+    componentwillreceiveprops: function() {
+        this.initTinyMCE();
+    },
     render: function() {
-        var that = this;
-
-        tinymce.init({
-            mode: "exact",
-            elements: "area1",
-            setup : function(editor) {
-                editor.on('change', function(e) {
-                    that.handleChange(editor.getContent());
-                });
-            },
-            plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-            "searchreplace wordcount visualblocks visualchars code",
-            "insertdatetime media nonbreaking save table contextmenu directionality",
-            "emoticons template paste textcolor colorpicker textpattern imagetools"],
-            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-            toolbar2: "print preview media | forecolor backcolor emoticons",
-            height: 500,
-            selector: "#adminContent"
-        });
-
         return (
             <div>
                 <h1>Admin</h1>
@@ -71,6 +56,27 @@ var AdminView = React.createClass({
     },
     handleChange: function(value) {
         this.setState({content: value});
+    },
+    initTinyMCE: function() {
+        var that = this;
+
+        tinymce.init({
+            mode: "exact",
+            elements: "area1",
+            setup : function(editor) {
+                editor.on('change', function(e) {
+                    that.handleChange(editor.getContent());
+                });
+            },
+            plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code",
+            "insertdatetime media nonbreaking save table contextmenu directionality",
+            "emoticons template paste textcolor colorpicker textpattern imagetools"],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            height: 500,
+            selector: "#adminContent"
+        });
     }
 });
 
