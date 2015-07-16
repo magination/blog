@@ -16,8 +16,8 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
       if (err) { return done(err); }
-      if (!user) return done('Incorrect username');
-      user.validPassword(password)
+      if (!user) return done(null, false, 'Incorrect username');
+      user.validPassword(password, user.password)
         .then(done(null,user))
         .catch(function(err){
           res.send(err);
@@ -26,9 +26,9 @@ passport.use(new LocalStrategy(
   }
 ));
 
-module.exports = function(req, res, next){
+/*module.exports = function(req, res, next){
   passport.authenticate('local', function(err, user){
       if(err) return res.send(err);
       req.logIn(user,next);
   })(req,res,next);
-};
+};*/

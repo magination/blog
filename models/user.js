@@ -14,8 +14,8 @@ userSchema.pre('save', function(next){
   }.bind(this));
 });
 
-userSchema.methods.validPassword = function(password, next){
-  return bcrypt.compareAsync(this.password, password, function(err, res) {
+userSchema.methods.validPassword = function(dbPassword, password, next){
+  return bcrypt.compareAsync(dbPassword, password, function(err, res) {
     if(err) throw new Error("Incorrect password");
     return res;
   });
