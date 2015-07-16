@@ -10,6 +10,7 @@ var LoginService = {
                 .post('/login', {username: username, password: password})
                 .on('error', requestHandler.error(reject))
                 .end(function (err, res) {
+                    console.log('result', res);
                     requestHandler.response(resolve, reject, err, res)
                 });
         })

@@ -15,6 +15,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
+      console.log("MORDI ER MANN");
       if (err) { return done(err); }
       if (!user) return done(null, false, 'Incorrect username');
       user.validPassword(password, user.password)
