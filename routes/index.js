@@ -5,6 +5,7 @@ var baucis = require('baucis');
 var router = express.Router();
 var auth = require('./auth')
 var middleware = require('./middleware');
+var passport = require('passport');
 
 
 module.exports = function(app){

@@ -28,13 +28,3 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-
-module.exports = function(req, res, next){
-  passport.authenticate('local', function(err, user){
-      if (err) {
-        res.status(403);
-        return res.send(err);
-      }
-      req.logIn(user,next);
-  })(req,res,next);
-};

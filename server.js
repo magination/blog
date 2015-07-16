@@ -5,6 +5,7 @@ var mongoose        = require('mongoose');
 mongoose.connect('mongodb://localhost/magination');
 var passport        = require('passport');
 var baucis          = require('baucis');
+var user 			= require('./models/user');
 
 require('./updates/init');
 
