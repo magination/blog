@@ -18,13 +18,17 @@ module.exports = function(app){
 
   baucis.rest('user').request(middleware.requireUser);
 
-  router.post('/login', auth, function(req, res) {
-    res.send('Hello! '+ req.user.username);
+  router.post('/login', auth, function(req, res, next) {
+    if (req.user) {
+      res.status(200);
+      res.send('Hello! '+ req.user.username);
+      }
   });
 
   router.get('/logout', function(req, res){
     req.logout();
-    res.redirect('/');
+    res.status(200);
+    res.send('Logged out!');
   });
 
   app.use('/api', baucis());

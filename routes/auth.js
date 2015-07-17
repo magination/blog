@@ -18,9 +18,12 @@ passport.use(new LocalStrategy(
       if (err) { return done(err); }
       if (!user) return done('Incorrect username');
       user.validPassword(password)
-        .then(done(null,user))
-        .catch(function(err){
-          res.send(err);
+        .then(function(result){
+          if(result) return done(null,user);
+          done('Incorrect password');
+          }).catch(function(err){
+            console.log(err);
+            return done('Something went wrong :(',null);
         });
     });
   }
@@ -28,7 +31,10 @@ passport.use(new LocalStrategy(
 
 module.exports = function(req, res, next){
   passport.authenticate('local', function(err, user){
-      if(err) return res.send(err);
+      if (err) {
+        res.status(403);
+        return res.send(err);
+      }
       req.logIn(user,next);
   })(req,res,next);
 };
