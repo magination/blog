@@ -8,7 +8,7 @@ var AdminActions = require('../actions/AdminActions')
 function getState() {
     return {
         feedback: AdminStore.getFeedback(),
-        conten: ""
+        content: ""
     };
 };
 
