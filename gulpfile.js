@@ -11,6 +11,9 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
 var nodemon = require('nodemon');
+var _if = require('gulp-if');
+var args = require('yargs').argv;
+var isProduction = !!args.production;
 
 
 var dist_dir = './static',
@@ -50,15 +53,15 @@ function bundleJs(watch){
 	return b.bundle()
 		.pipe(source('app.bundle.js'))
 		.pipe(buffer())
-		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(_if(!isProduction, sourcemaps.init({loadMaps: true})))
 		.pipe(uglify())
-		.pipe(sourcemaps.write('./'))
+		.pipe(_if(!isProduction, sourcemaps.write('./')))
 		.on('error', gutil.log)
 		.pipe(gulp.dest(dist_dir+'/js'));
 };
 
 gulp.task('js', function () {
-		bundleJs();
+		return bundleJs();
 });
 
 gulp.task('server', function () {
