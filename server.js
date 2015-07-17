@@ -2,7 +2,7 @@ var express         = require('express');
 var bodyParser      = require('body-parser');
 var router          = require('./routes');
 var mongoose        = require('mongoose');
-mongoose.connect('mongodb://localhost/magination');
+mongoose.connect('mongodb://localhost/blog');
 var passport        = require('passport');
 var baucis          = require('baucis');
 
@@ -20,6 +20,6 @@ app.use(passport.session());
 
 app.use('/', router(app));
 
-app.listen(3000, function() {
-    console.log('Running on port:3000');
+app.listen(3001, function() {
+    console.log('Running on port:3001');
 });
