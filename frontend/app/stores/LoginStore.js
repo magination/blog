@@ -24,7 +24,6 @@ var LoginStore = _.extend({}, EventEmitter.prototype, {
 LoginStore.dispatchToken = Dispatcher.register(function(action) {
     switch (action.actionType) {
         case BlogConstants.LOGIN_COMPLETED:
-            console.log(action);
             feedback = action.data;
             LoginStore.emitChange();
             break;

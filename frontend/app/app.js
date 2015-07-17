@@ -23,7 +23,7 @@ var routes = (
         <Route path="/login" handler={LoginView}/>
         <Route path="/admin" handler={AdminView}/>
         <Route path="/post/:id" handler={BlogPostView}/>
-        <DefaultRoute handler={FrontView}/>
+        <DefaultRoute name="home" handler={FrontView}/>
     </Route>
 );
 

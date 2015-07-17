@@ -15,7 +15,6 @@ passport.deserializeUser(function(id, done) {
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
-      console.log("MORDI ER MANN");
       if (err) { return done(err); }
       if (!user) return done('Incorrect username');
       user.validPassword(password)
@@ -23,9 +22,18 @@ passport.use(new LocalStrategy(
           if(result) return done(null,user);
           done('Incorrect password');
           }).catch(function(err){
-            console.log(err);
             return done('Something went wrong :(',null);
         });
     });
   }
 ));
+
+module.exports = function(req, res, next){
+  passport.authenticate('local', function(err, user){
+      if (err) {
+        res.status(403);
+        return res.send({message: err});
+      }
+      req.logIn(user,next);
+  })(req,res,next);
+};

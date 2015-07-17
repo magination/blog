@@ -1,13 +1,40 @@
 var React = require("react");
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
+var Navigation = ReactRouter.Navigation;
+
 var lodash = require('lodash');
+
 var LoginActions = require('../actions/LoginActions');
 var LoginStore = require('../stores/LoginStore');
 
 var LoginView  = React.createClass({
+    mixins: [Navigation],
+    getInitialState: function() {
+        return {userMessage: ""};
+    },
     _onChange : function(){
-        console.log("New feedback:", LoginStore.getFeedback());
+        if (LoginStore.getFeedback().status === 200) {
+            this.transitionTo('home');
+        } else {
+            this.setState({userMessage: LoginStore.getFeedback()});
+        }
+    },
+    componentDidMount: function(){
+      LoginStore.addChangeListener(this._onChange);
+    },
+    render: function() {
+        return <div>
+            <h1> Log in or face termination! </h1>
+            <form onSubmit={this._login}>
+                <label for="username"> Username </label>
+                <input type="text" ref="username" name="username"/>
+                <label for="password"> Password </label>
+                <input type="password" ref="password" name="password"/>
+                <input type="submit" value="Login" />
+            </form>
+            <p>{this.state.userMessage}</p>
+        </div>
     },
     _login : function() {
         event.preventDefault();
@@ -15,25 +42,9 @@ var LoginView  = React.createClass({
         var username = React.findDOMNode(this.refs.username).value;
         var password = React.findDOMNode(this.refs.password).value;
 
-        console.log(username, password);
 
         LoginActions.login(username, password);
     },
-    componentDidMount(){
-      LoginStore.addChangeListener(this._onChange);
-    },
-    render: function() {
-    return <div>
-        <h1> Log in or face termination! </h1>
-        <form onSubmit={this._login}>
-            <label for="username"> Username </label>
-            <input type="text" ref="username" name="username"/>
-            <label for="password"> Password </label>
-            <input type="password" ref="password" name="password"/>
-            <input type="submit" value="Login" />
-        </form>
-    </div>
-    }
 });
 
 module.exports = LoginView;
