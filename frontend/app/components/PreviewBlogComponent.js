@@ -8,10 +8,10 @@ var previewBlogComponent = React.createClass({
         var body = this.props.blogpost.body.length > 1000 ? this.props.blogpost.body.substring(0,1000) + "..." : this.props.blogpost.body;
         return(
             <div className="blogPostPreview">
-                <h2> <Link to={`/post/${this.props.blogpost.slug}`}>{this.props.blogpost.title} </Link> </h2>
+                <h2> <Link to={'/post/'+this.props.blogpost.slug}>{this.props.blogpost.title} </Link> </h2>
                 <div className="author"><p> Written by: <span className="authorName"> Juul Arthur </span> </p></div>
                 <p> {body} </p>
-                <Link to={`/post/${this.props.blogpost.slug}`}><button name="readMoreButton">Read more</button></Link>
+                <Link to={'/post/'+this.props.blogpost.slug}><button name="readMoreButton">Read more</button></Link>
             </div>
         )
     }
