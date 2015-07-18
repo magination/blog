@@ -15,6 +15,7 @@ var previewBlogComponent = React.createClass({
                 <div className="author"><p> Written by: <span className="authorName"> Juul Arthur </span> </p></div>
                 <p> {body} </p>
                 <Link to={'/post/' + this.props.blogpost.slug}><button name="readMoreButton">Read more</button></Link>
+                <hr />
             </div>
         );
     }
