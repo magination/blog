@@ -14,6 +14,7 @@ var nodemon = require('nodemon');
 var _if = require('gulp-if');
 var args = require('yargs').argv;
 var isProduction = !!args.production;
+var eslint = require('gulp-eslint');
 
 
 var dist_dir = './static',
@@ -73,6 +74,14 @@ gulp.task('server', function () {
   })
 });
 
+gulp.task('lint', function () {
+    return gulp.src([js_dir +'/**/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
+});
+
+
 
 gulp.task('watch', function () {
 	gulp.watch([less_dir+'/**/*.less'], ['less']);
@@ -80,5 +89,6 @@ gulp.task('watch', function () {
 	gulp.start('server');
 });
 
+gulp.task('test', ['lint']);
 
 gulp.task('default', ['less', 'js', 'tinymce', 'img']);
