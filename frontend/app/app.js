@@ -9,8 +9,11 @@ var AdminView = require('./components/AdminView');
 var LoginView = require('./components/LoginView');
 
 var App = React.createClass({
+
+
+
     render: function () {
-        return (
+                    return (
             <div className="App">
                 <RouteHandler/>
             </div>
