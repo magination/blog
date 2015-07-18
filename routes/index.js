@@ -21,14 +21,14 @@ module.exports = function(app){
   router.post('/login', auth, function(req, res, next) {
     if (req.user) {
       res.status(200);
-      res.send('Hello! '+ req.user.username);
+      res.send({status: 200});
       }
   });
 
   router.get('/logout', function(req, res){
     req.logout();
     res.status(200);
-    res.send('Logged out!');
+    res.send({status: 200});
   });
 
   app.use('/api', baucis());
