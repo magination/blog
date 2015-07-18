@@ -13,43 +13,46 @@ function getState() {
 }
 
 var FrontView = React.createClass({
-	_onChange: function(){
+    _onChange: function () {
         this.setState(getState());
     },
-    componentDidMount: function() {
+    componentDidMount: function () {
         AllBlogPostsStore.addChangeListener(this._onChange);
         BlogActions.fetchAllClient();
     },
-    componentWillUnmount: function() {
+    componentWillUnmount: function () {
         AllBlogPostsStore.removeChangeListener(this._onChange);
     },
-    getInitialState: function() {
+    getInitialState: function () {
         return getState();
     },
-    render: function() {
-        if(this.state.blogs[0]){
+    render: function () {
+        if (this.state.blogs[0]) {
             var previewList = [];
             for (var post in this.state.blogs) {
                 previewList.push(this.state.blogs[post]);
             }
-            previewList = lodash.map(previewList, function(post, key) {
+            previewList = lodash.map(previewList, function (post, key) {
                 return <PreviewBlogComponent key={key} blogpost={post}/>;
             });
 
             return (
-            <div className="SiteContainer">
-                <h1>Magination Blog</h1>
-                <div className="postContainer">
-                <Link to={"/admin"} className="create-blog-link">Create blog post</Link>
-                <div className="clear-both" />
-                {previewList}
+                <div className="SiteContainer">
+                    <div className="siteHeader">
+                        <img src="http://res.cloudinary.com/magination/image/upload/v1437219036/logo2_pez3ao.png"/>
+                    </div>
+                    <div className="postContainer">
+                        <div className="clear-both"/>
+                        {previewList}
+                        <Link to={"/admin"} className="create-blog-link">Create blog post</Link>
+                    </div>
                 </div>
-            </div>
-            ); }
-        else{
+            );
+        }
+        else {
             return (
-            <div>
-            </div>);
+                <div>
+                </div>);
         }
     }
 });
