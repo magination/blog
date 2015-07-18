@@ -2,7 +2,7 @@ var React = require("react");
 var BlogStore = require("../stores/BlogStore");
 var BlogActions = require("../actions/BlogActions");
 var Router = require('react-router');
-
+var Header = require('./Header');
 
 function getState() {
     return {
@@ -30,6 +30,7 @@ var BlogPostView = React.createClass({
     render: function() {
         return (
             <div>
+                <Header />
                 <h1 className="blog-post-title">{this.state.title}</h1>
                 <h2> Written by: {this.state.author} </h2>
                 <div dangerouslySetInnerHTML={{__html: this.state.body}}/>

@@ -4,6 +4,7 @@ var Link = ReactRouter.Link;
 var AllBlogPostsStore = require("../stores/AllBlogPostsStore");
 var BlogActions = require("../actions/BlogActions");
 var PreviewBlogComponent = require('./PreviewBlogComponent');
+var Header = require('./Header');
 var lodash = require('lodash');
 
 function getState() {
@@ -38,9 +39,7 @@ var FrontView = React.createClass({
 
             return (
                 <div className="SiteContainer">
-                    <div className="siteHeader">
-                        <img src="http://res.cloudinary.com/magination/image/upload/v1437219036/logo2_pez3ao.png"/>
-                    </div>
+                    <Header />
                     <div className="postContainer">
                         <div className="clear-both"/>
                         {previewList}
