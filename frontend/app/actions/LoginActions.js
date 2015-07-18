@@ -2,7 +2,7 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var LoginService = require('../services/LoginService');
 var BlogConstants = require('../constants/BlogConstants');
 
-var LoginActions = {
+var LoginActions = {
     login: function(username, password){
         Dispatcher.dispatch({
           actionType: BlogConstants.LOGIN
@@ -12,13 +12,13 @@ var LoginActions = {
                 Dispatcher.dispatch({
                     actionType: BlogConstants.LOGIN_COMPLETED,
                     data: data
-                })
+                });
             }, function(error){
                 Dispatcher.dispatch({
                     actionType: BlogConstants.LOGIN_ERROR,
                     error: error
                 });
-            })
+            });
     }
 };
 

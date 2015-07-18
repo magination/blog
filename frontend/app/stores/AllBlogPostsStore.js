@@ -4,7 +4,7 @@ var EventEmitter = require('events').EventEmitter;
 var _ = require("lodash");
 var CHANGE_EVENT = 'change-allblogposts';
 
-var _blogs = {}
+var _blogs = {};
 
 
 function loadBlog(data) {
@@ -12,9 +12,9 @@ function loadBlog(data) {
 }
 
 function fetchFailed(error) {
-    _blog._hasErrors = true;
-    _blog.errors = _blog.errors || [];
-    _blog.errors.push(error);
+    _blogs._hasErrors = true;
+    _blogs.errors = _blogs.errors || [];
+    _blogs.errors.push(error);
 }
 
 var AllBlogsStore = _.extend({}, EventEmitter.prototype, {
@@ -46,7 +46,7 @@ AllBlogsStore.dispatchToken = Dispatcher.register(function(action) {
             AllBlogsStore.emitChange();
             break;
         default:
-    };
+    }
 
     return true;
 });

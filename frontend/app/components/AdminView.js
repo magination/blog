@@ -1,16 +1,14 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
-var lodash = require('lodash');
+
 var AdminStore = require('../stores/AdminStore');
-var AdminActions = require('../actions/AdminActions')
+var AdminActions = require('../actions/AdminActions');
 
 function getState() {
     return {
         feedback: AdminStore.getFeedback(),
         content: ""
     };
-};
+}
 
 
 var AdminView = React.createClass({
@@ -63,8 +61,8 @@ var AdminView = React.createClass({
         tinymce.init({
             mode: "exact",
             elements: "area1",
-            setup : function(editor) {
-                editor.on('change', function(e) {
+            setup: function(editor) {
+                editor.on('change', function() {
                     that.handleChange(editor.getContent());
                 });
             },

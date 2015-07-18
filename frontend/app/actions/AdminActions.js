@@ -20,7 +20,7 @@ var BlogActions = {
                     error: error
                 });
             });
-    },
+    }
 };
 
 module.exports = BlogActions;

@@ -33,9 +33,10 @@ var FrontView = React.createClass({
                 previewList.push(this.state.blogs[post]);
             }
             previewList = lodash.map(previewList, function(post, key) {
-                return <PreviewBlogComponent key={key} blogpost={post}/>
-            })
-            return(
+                return <PreviewBlogComponent key={key} blogpost={post}/>;
+            });
+
+            return (
             <div className="SiteContainer">
                 <h1>Magination Blog</h1>
                 <div className="postContainer">
@@ -44,11 +45,11 @@ var FrontView = React.createClass({
                 {previewList}
                 </div>
             </div>
-            )}
+            ); }
         else{
-            return(
+            return (
             <div>
-            </div>)
+            </div>);
         }
     }
 });

@@ -2,7 +2,6 @@ var React = require("react");
 var BlogStore = require("../stores/BlogStore");
 var BlogActions = require("../actions/BlogActions");
 var Router = require('react-router');
-var Router = Router;
 
 
 function getState() {
@@ -26,14 +25,16 @@ var BlogPostView = React.createClass({
         BlogStore.removeChangeListener(this._onChange);
     },
     getInitialState: function() {
-        return  getState();
+        return getState();
     },
     render: function() {
-        return <div>
-            <h1 className="blog-post-title">{this.state.title}</h1>
-            <h2> Written by: {this.state.author} </h2>
-            <div dangerouslySetInnerHTML={{__html: this.state.body}}/>
-        </div>
+        return (
+            <div>
+                <h1 className="blog-post-title">{this.state.title}</h1>
+                <h2> Written by: {this.state.author} </h2>
+                <div dangerouslySetInnerHTML={{__html: this.state.body}}/>
+            </div>
+            );
     }
 });
 

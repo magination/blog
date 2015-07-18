@@ -4,7 +4,7 @@ var EventEmitter = require('events').EventEmitter;
 var _ = require("lodash");
 var CHANGE_EVENT = 'change-blogstore';
 
-var _blog = {}
+var _blog = {};
 var _title = "";
 var _body = "";
 var _author = "";
@@ -62,7 +62,7 @@ BlogStore.dispatchToken = Dispatcher.register(function(action) {
             BlogStore.emitChange();
             break;
         default:
-    };
+    }
 
     return true;
 });

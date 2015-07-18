@@ -9,10 +9,10 @@ var LoginService = {
                 .post('/login', {username: username, password: password})
                 .on('error', requestHandler.error(reject))
                 .end(function (err, res) {
-                    requestHandler.response(resolve, reject, err, res)
+                    requestHandler.response(resolve, reject, err, res);
                 });
-        })
+        });
     }
-}
+};
 
 module.exports = LoginService;

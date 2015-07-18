@@ -1,19 +1,16 @@
 var React = require("react");
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
+var ReactRouter = require("react-router");
 var Navigation = ReactRouter.Navigation;
-
-var lodash = require('lodash');
 
 var LoginActions = require('../actions/LoginActions');
 var LoginStore = require('../stores/LoginStore');
 
-var LoginView  = React.createClass({
+var LoginView = React.createClass({
     mixins: [Navigation],
     getInitialState: function() {
         return {userMessage: ""};
     },
-    _onChange : function(){
+    _onChange: function(){
         if (LoginStore.getFeedback().status === 200) {
             this.transitionTo('home');
         } else {
@@ -24,19 +21,21 @@ var LoginView  = React.createClass({
       LoginStore.addChangeListener(this._onChange);
     },
     render: function() {
-        return <div>
-            <h1> Log in or face termination! </h1>
-            <form onSubmit={this._login}>
-                <label for="username"> Username </label>
-                <input type="text" ref="username" name="username"/>
-                <label for="password"> Password </label>
-                <input type="password" ref="password" name="password"/>
-                <input type="submit" value="Login" />
-            </form>
-            <p>{this.state.userMessage}</p>
-        </div>
+        return (
+            <div>
+                <h1> Log in or face termination! </h1>
+                <form onSubmit={this._login}>
+                    <label htmlFor="username"> Username </label>
+                    <input type="text" ref="username" name="username"/>
+                    <label htmlFor="password"> Password </label>
+                    <input type="password" ref="password" name="password"/>
+                    <input type="submit" value="Login" />
+                </form>
+                <p>{this.state.userMessage}</p>
+            </div>
+            );
     },
-    _login : function() {
+    _login: function() {
         event.preventDefault();
 
         var username = React.findDOMNode(this.refs.username).value;
@@ -44,7 +43,7 @@ var LoginView  = React.createClass({
 
 
         LoginActions.login(username, password);
-    },
+    }
 });
 
 module.exports = LoginView;

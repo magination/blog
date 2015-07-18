@@ -38,7 +38,7 @@ BlogStore.dispatchToken = Dispatcher.register(function(action) {
             BlogStore.emitChange(action.error);
             break;
         default:
-    };
+    }
 
     return true;
 });

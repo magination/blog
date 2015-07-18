@@ -11,7 +11,7 @@ var LoginStore = _.extend({}, EventEmitter.prototype, {
         return feedback;
     },
     addChangeListener: function(callback){
-        this.on(CHANGE_EVENT,callback);
+        this.on(CHANGE_EVENT, callback);
     },
     emitChange: function(){
         this.emit(CHANGE_EVENT);

@@ -15,7 +15,7 @@ var requestHandler = {
         }
         else {
             if (res.body) {
-                reject(res.body)
+                reject(res.body);
             }
             else {
                 reject({

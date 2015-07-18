@@ -1,0 +1,86 @@
+body {
+  font-family: 'Merriweather';
+  background-color: lightgray;
+  color: black;
+  text-align: center;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.postContainer {
+  background-color: white;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 1000px;
+  padding-top: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 30px;
+}
+button {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: 0px;
+}
+button:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+.blogPostPreview {
+  padding: 10px;
+  text-align: left;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.blogPostPreview h2 {
+  text-align: center;
+  margin-bottom: 0px;
+}
+.blogPostPreview a {
+  color: inherit;
+  text-decoration: none;
+}
+.blogPostPreview a:visited {
+  color: inherit;
+}
+.blogPostPreview .author {
+  text-align: right;
+  margin-top: 5px;
+  font-size: 12px;
+}
+.blogPostPreview .author p {
+  margin: 0px 20px 0px 0px;
+}
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Merriweather Light'), local('Merriweather-Light'), url(https://fonts.gstatic.com/s/merriweather/v8/ZvcMqxEwPfh2qDWBPxn6nkZRWJQ0UjzR2Uv6RollX_g.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+.blog-post-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+.create-blog-link {
+  float: right;
+}
+.clear-both {
+  clear: both;
+}
+.editor {
+  height: 500px;
+}
+
+/*# sourceMappingURL=styles.bundle.css.map */
