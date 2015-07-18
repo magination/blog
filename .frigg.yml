@@ -1,0 +1,5 @@
+setup_tasks:
+    - npm install
+
+tasks:
+    - npm test
