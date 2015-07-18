@@ -4,7 +4,7 @@ var Link = ReactRouter.Link;
 
 var previewBlogComponent = React.createClass({
     propTypes: {
-        blogpost: React.PropTypes.json.isRequired
+        blogpost: React.PropTypes.object
     },
     render: function(){
         //If body is larger than 1000 chars, limit to 1000 and add dotdotdot
