@@ -45,24 +45,31 @@ function bundleJs(watch){
 		transform: [reactify],
 		debug: true,
 		cache: {},
-		packageCache: {}
+		packageCache: {},
+		fullPaths: true
 	})
-	if (watch)
+	if(watch){
 		watchify(b).on('time', function(time){
-		gutil.log('Finished compiling js: ' + time + ' ms');
-	});
+			gutil.log('Finished compiling js: ' + time + ' ms');
+		});
+	}
 	return b.bundle()
 		.pipe(source('app.bundle.js'))
 		.pipe(buffer())
-		.pipe(_if(!isProduction, sourcemaps.init({loadMaps: true})))
+		.pipe(sourcemaps.init({loadMaps: true, debug: true}))
 		.pipe(uglify())
 		.pipe(_if(!isProduction, sourcemaps.write('./')))
 		.on('error', gutil.log)
 		.pipe(gulp.dest(dist_dir+'/js'));
+
 };
 
 gulp.task('js', function () {
 		return bundleJs();
+});
+
+gulp.task('js:watch', function () {
+		return bundleJs(true);
 });
 
 gulp.task('server', function () {
@@ -82,10 +89,8 @@ gulp.task('lint', function () {
 });
 
 
-
 gulp.task('watch', function () {
-	gulp.watch([less_dir+'/**/*.less'], ['less']);
-	bundleJs(true);
+	gulp.watch([less_dir+'/**/*.less', js_dir+'/**/*.js'], ['less', 'js:watch']);
 	gulp.start('server');
 });
 
