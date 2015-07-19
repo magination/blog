@@ -1,11 +1,14 @@
 var React = require('react');
 
 var AdminStore = require('../stores/AdminStore');
+var LoginStore = require('../stores/LoginStore');
 var AdminActions = require('../actions/AdminActions');
+var LoginActions = require('../actions/LoginActions');
 
 function getState() {
     return {
         feedback: AdminStore.getFeedback(),
+        authenticated: LoginStore.getAuthenticated(),
         content: ""
     };
 }
@@ -16,12 +19,13 @@ var AdminView = React.createClass({
         this.setState(getState());
     },
     getInitialState: function () {
-        return {feedback: '', content: ''};
+        return {feedback: '', authenticated: true, content: ''};
     },
     componentDidMount: function() {
-        this.initTinyMCE();
-
         AdminStore.addChangeListener(this._onChange);
+        LoginStore.addChangeListener(this._onChange);
+        LoginActions.authenticate();
+        this.initTinyMCE();
     },
     componentWillUnmount: function() {
         AdminStore.removeChangeListener(this._onChange);

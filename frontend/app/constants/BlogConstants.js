@@ -4,6 +4,7 @@ var constants = keyMirror({
     BLOG_FETCH: null,
     BLOG_FETCH_SUCCESS: null,
     BLOG_FETCH_FAIL: null,
+
     ALL_BLOG_FETCH: null,
     ALL_BLOG_FETCH_SUCCESS: null,
     ALL_BLOG_FETCH_FAIL: null,
@@ -16,7 +17,11 @@ var constants = keyMirror({
     //Login
     LOGIN: null,
     LOGIN_COMPLETED: null,
-    LOGIN_ERROR: null
+    LOGIN_ERROR: null,
+
+    AUTHENTICATE: null,
+    AUTHENTICATE_COMPLETED: null,
+    AUTHENTICATE_ERROR: null
 });
 
 module.exports = constants;

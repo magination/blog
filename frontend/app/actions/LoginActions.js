@@ -19,6 +19,23 @@ var LoginActions = {
                     error: error
                 });
             });
+    },
+    authenticate: function(){
+        Dispatcher.dispatch({
+          actionType: BlogConstants.AUTHENTICATE
+        });
+        LoginService.authenticate()
+        .then(function(data){
+                Dispatcher.dispatch({
+                    actionType: BlogConstants.AUTHENTICATE_COMPLETED,
+                    data: data
+                });
+            }, function(error){
+                Dispatcher.dispatch({
+                    actionType: BlogConstants.AUTHENTICATE_ERROR,
+                    error: error
+                });
+            });
     }
 };
 

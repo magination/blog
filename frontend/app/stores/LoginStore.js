@@ -31,6 +31,16 @@ LoginStore.dispatchToken = Dispatcher.register(function(action) {
             feedback = action.error;
             LoginStore.emitChange();
             break;
+        case BlogConstants.AUTENTICATE_SUCCESS:
+            feedback = action.data;
+            console.log(feedback);
+            LoginStore.emitChange();
+            break;
+        case BlogConstants.AUTENTICATE_ERROR:
+            feedback = action.error;
+            console.log(feedback);
+            LoginStore.emitChange();
+            break;
     }
 });
 

@@ -31,6 +31,8 @@ module.exports = function(app){
     res.send({status: 200});
   });
 
+  router.get('/authenticate', middleware.requireUser);
+
   app.use('/api', baucis());
 
   router.get('*', function(req, res) {
