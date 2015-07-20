@@ -1,5 +1,6 @@
 setup_tasks:
-    - npm install
-
+ - npm install npm -g
+ - npm install
+ - npm install gulp
 tasks:
-    - npm test
+ - npm test
