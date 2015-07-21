@@ -12,7 +12,7 @@ var LoginView = React.createClass({
     },
     _onChange: function(){
         if (LoginStore.getFeedback().status === 200) {
-            this.transitionTo('home');
+            this.transitionTo('admin');
         } else {
             this.setState({userMessage: LoginStore.getFeedback()});
         }

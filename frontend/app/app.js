@@ -21,7 +21,7 @@ var App = React.createClass({
 var routes = (
     <Route handler={App}>
         <Route path="/login" handler={LoginView}/>
-        <Route path="/admin" handler={AdminView}/>
+        <Route name="admin" path="/admin" handler={AdminView}/>
         <Route path="/post/:id" handler={BlogPostView}/>
         <DefaultRoute name="home" handler={FrontView}/>
     </Route>
