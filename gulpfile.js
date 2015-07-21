@@ -9,6 +9,9 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
+var prefix = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps')
+var csso = require('gulp-csso');
 var nodemon = require('nodemon');
 var _if = require('gulp-if');
 var args = require('yargs').argv;
@@ -34,8 +37,12 @@ gulp.task('img', function(){
 
 gulp.task('less', function(){
 	return gulp.src(less_dir+'/styles.less')
-	.pipe(less())
-	.pipe(gulp.dest(dist_dir+'/css/'));
+		.pipe(_if(!isProduction, sourcemaps.init({loadMaps: true})))
+		.pipe(less())
+		.pipe(prefix())
+		.pipe(_if(isProduction, csso()))
+		.pipe(_if(!isProduction, sourcemaps.write('.')))
+		.pipe(gulp.dest(dist_dir+'/css'));
 });
 
 function bundleJs(watch){
