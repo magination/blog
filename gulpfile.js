@@ -18,10 +18,10 @@ var eslint = require('gulp-eslint');
 
 
 var dist_dir = './static',
-	app_dir = './frontend',
-	img_dir = app_dir+'/images',
-	less_dir = app_dir+'/styles',
-	js_dir =  app_dir+'/app';
+app_dir = './frontend',
+img_dir = app_dir+'/images',
+less_dir = app_dir+'/styles',
+js_dir =  app_dir+'/app';
 
 gulp.task('tinymce', function(){
 	gulp.src(app_dir+'/tinymce/**/*.*')
@@ -39,39 +39,54 @@ gulp.task('less', function(){
 	.pipe(gulp.dest(dist_dir+'/css/'));
 });
 
-function bundleJs(watch){
-	var b = browserify({
-		entries: js_dir+'/app.js',
-		transform: [reactify],
-		debug: true,
-		cache: {},
-		packageCache: {}
-	})
-	if (watch)
-		watchify(b).on('time', function(time){
-		gutil.log('Finished compiling js: ' + time + ' ms');
-	});
-	return b.bundle()
+function bundleJs(options){
+	options = options ? options:{};
+	if(!options.bundle){
+		options.bundle = browserify({
+			entries: js_dir+'/app.js',
+			transform: [reactify],
+			debug: true,
+			cache: {},
+			packageCache: {},
+			fullPaths: true
+		})
+	};
+
+	if(options.watch){
+		watchify(options.bundle)
+		.on('time', function(time){
+			gutil.log('Finished compiling js: ' + time + ' ms');
+		}).on('update', function(){
+			bundleJs({bundle:options.bundle});
+		});
+	}
+
+	return options.bundle.bundle()
 		.pipe(source('app.bundle.js'))
 		.pipe(buffer())
-		.pipe(_if(!isProduction, sourcemaps.init({loadMaps: true})))
+		.pipe(_if(!isProduction, sourcemaps.init({loadMaps: true, debug: true})))
 		.pipe(uglify())
 		.pipe(_if(!isProduction, sourcemaps.write('./')))
 		.on('error', gutil.log)
 		.pipe(gulp.dest(dist_dir+'/js'));
+
 };
 
 gulp.task('js', function () {
-		return bundleJs();
+	return bundleJs();
+});
+
+gulp.task('js:watch', function(){
+	return bundleJs({watch:true});
 });
 
 gulp.task('server', function () {
-  nodemon({
-    script: 'server.js',
+	nodemon({
+		script: 'server.js',
 		ingore: [dist_dir, app_dir],
 		ext: 'js html',
 		env: { 'NODE_ENV': 'development' }
-  })
+	})
 });
 
 gulp.task('lint', function () {
@@ -81,12 +96,9 @@ gulp.task('lint', function () {
         .pipe(eslint.failOnError());
 });
 
-
-
 gulp.task('watch', function () {
 	gulp.watch([less_dir+'/**/*.less'], ['less']);
-	bundleJs(true);
-	gulp.start('server');
+	gulp.start(['js:watch','server']);
 });
 
 gulp.task('test', ['lint']);
