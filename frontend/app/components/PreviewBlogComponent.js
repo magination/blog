@@ -12,8 +12,8 @@ var previewBlogComponent = React.createClass({
         return (
             <div className="blogPostPreview">
                 <h2> <Link to={'/post/' + this.props.blogpost.slug}> {this.props.blogpost.title} </Link> </h2>
-                <div className="author"><p> Written by: <span className="authorName"> Juul Arthur </span> </p></div>
-                <p> {body} </p>
+                <div className="author">Written by: <span className="authorName"> {this.props.blogpost.author.username} </span></div>
+                <div className="blog-preview-body" dangerouslySetInnerHTML={{__html: body}}/>
                 <Link to={'/post/' + this.props.blogpost.slug}><button name="readMoreButton">Read more</button></Link>
                 <hr />
             </div>
