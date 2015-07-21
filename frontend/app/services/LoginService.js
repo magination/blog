@@ -12,6 +12,16 @@ var LoginService = {
                     requestHandler.response(resolve, reject, err, res);
                 });
         });
+    },
+    authenticate: function () {
+        return new Promise(function (resolve, reject) {
+            request
+                .get('/authenticate')
+                .on('error', requestHandler.error(reject))
+                .end(function (err, res) {
+                    requestHandler.response(resolve, reject, err, res);
+                });
+        });
     }
 };
 

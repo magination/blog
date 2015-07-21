@@ -10,7 +10,7 @@ var middleware = require('./middleware');
 module.exports = function(app){
   baucis.rest('post')
   .findBy('slug')
-  /*.request('collection','head post put delete', middleware.requireUser) */
+  .request('collection','head post put delete', middleware.requireUser)
   .query(function(req,res,next){
     req.baucis.query.populate('author', '-password')
     next();
@@ -29,6 +29,15 @@ module.exports = function(app){
     req.logout();
     res.status(200);
     res.send({status: 200});
+  });
+
+  router.get('/authenticate', function(req, res) {
+    if(!req.user) {
+      res.status(401);
+      return res.send({message: 'Unauthorized, please log in', status: 401});
+    } else {
+      return res.send({message: 'Authorized'})
+    }
   });
 
   app.use('/api', baucis());

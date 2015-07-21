@@ -10,7 +10,6 @@ var postSchema = new mongoose.Schema({
 })
 
 postSchema.pre('save', function(next){
-  //this.slug = slug(this.title)+'-'+this._id.getTimestamp().getTime()/1000;
   this.slug = slug(this.title);
   next();
 });
