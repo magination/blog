@@ -9,7 +9,7 @@ var previewBlogComponent = React.createClass({
     render: function(){
         //If body is larger than 1000 chars, limit to 1000 and add dotdotdot
         var body = this.props.blogpost.body.length > 1000 ? this.props.blogpost.body.substring(0, 1000) + "..." : this.props.blogpost.body;
-        var author = this.props.blogpost.author ? this.props.blogpost.author.username : "steinar";
+        var author = this.props.blogpost.author ? this.props.blogpost.author.username : "Magination";
         return (
             <div className="blogPostPreview">
                 <h2> <Link to={'/post/' + this.props.blogpost.slug}> {this.props.blogpost.title} </Link> </h2>

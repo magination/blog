@@ -28,6 +28,8 @@ var BlogPostView = React.createClass({
         return getState();
     },
     render: function () {
+
+        var author = this.state.author ? this.state.author.username : "Magination";
         return (
             <div>
                 <Header />
