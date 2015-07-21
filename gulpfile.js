@@ -10,6 +10,8 @@ var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
+var prefix = require('gulp-autoprefixer');
+var csso = require('gulp-csso');
 var nodemon = require('nodemon');
 var _if = require('gulp-if');
 var args = require('yargs').argv;
@@ -24,19 +26,23 @@ less_dir = app_dir+'/styles',
 js_dir =  app_dir+'/app';
 
 gulp.task('tinymce', function(){
-	gulp.src(app_dir+'/tinymce/**/*.*')
-	.pipe(gulp.dest(dist_dir+'/tinymce'));
+	return gulp.src(app_dir+'/tinymce/**/*.*')
+		.pipe(gulp.dest(dist_dir+'/tinymce'));
 });
 
 gulp.task('img', function(){
-	gulp.src(img_dir+'/**/*.*')
-	.pipe(gulp.dest(dist_dir+'/img'));
+	return gulp.src(img_dir+'/**/*.*')
+		.pipe(gulp.dest(dist_dir+'/img'));
 });
 
 gulp.task('less', function(){
-	gulp.src(less_dir+'/styles.less')
+	return gulp.src(less_dir+'/*.less')
+	.pipe(_if(!isProduction, sourcemaps.init({loadMaps: true})))
 	.pipe(less())
-	.pipe(gulp.dest(dist_dir+'/css/'));
+	.pipe(prefix())
+	.pipe(csso())
+	.pipe(_if(!isProduction, sourcemaps.write('.')))
+	.pipe(gulp.dest(dist_dir+'/css'));
 });
 
 function bundleJs(options){
