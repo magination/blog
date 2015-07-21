@@ -6,7 +6,7 @@ var BloggClient = {
     getAllBlogs: function () {
         return new Promise(function (resolve, reject) {
             request
-                .get('/api/posts')
+                .get('/api/posts?sort=-_id')
                 .on('error', requestHandler.error(reject))
                 .end(function(err, res){
                     requestHandler.response(resolve, reject, err, res);
