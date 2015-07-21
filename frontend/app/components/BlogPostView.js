@@ -28,6 +28,7 @@ var BlogPostView = React.createClass({
         return getState();
     },
     render: function () {
+
         return (
             <div>
                 <Header />

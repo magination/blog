@@ -10,7 +10,7 @@ var LoginActions = require('../actions/LoginActions');
 function getState() {
     return {
         feedback: AdminStore.getFeedback(),
-        content: ""
+        loginFeedback: LoginStore.getFeedback()
     };
 }
 
@@ -24,7 +24,11 @@ var AdminView = React.createClass({
         }
     },
     getInitialState: function () {
-        return getState();
+        return {
+            feedback: AdminStore.getFeedback(),
+            loginFeedback: LoginStore.getFeedback(),
+            content: ""
+        };
     },
     componentDidMount: function() {
         AdminStore.addChangeListener(this._onChange);
@@ -41,7 +45,7 @@ var AdminView = React.createClass({
     },
     render: function() {
         var hidden = cx({
-            'hidden': LoginStore.getFeedback().message !== "Authorized"
+            'hidden': this.state.loginFeedback.message !== "Authorized"
         });
 
         return (
@@ -64,7 +68,7 @@ var AdminView = React.createClass({
     },
     savePost: function(e) {
         e.preventDefault();
-        AdminActions.savePost({title: e.target.title.value, body: this.state.content, author: '558ebbafa59d66a0056f5abf'});
+        AdminActions.savePost({title: e.target.title.value, body: this.state.content, author: this.state.loginFeedback.userID});
     },
     handleChange: function(value) {
         this.setState({content: value});
