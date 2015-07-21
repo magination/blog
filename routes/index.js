@@ -12,6 +12,7 @@ module.exports = function(app){
   .findBy('slug')
   .request('collection','head post put delete', middleware.requireUser)
   .query(function(req,res,next){
+    console.log(req);
     req.baucis.query.populate('author', '-password')
     next();
   });
