@@ -1,4 +1,6 @@
 var React = require('react');
+var Navigation = require('react-router').Navigation;
+var cx = require('classnames');
 
 var AdminStore = require('../stores/AdminStore');
 var LoginStore = require('../stores/LoginStore');
@@ -8,23 +10,27 @@ var LoginActions = require('../actions/LoginActions');
 function getState() {
     return {
         feedback: AdminStore.getFeedback(),
-        authenticated: LoginStore.getAuthenticated(),
         content: ""
     };
 }
 
 
 var AdminView = React.createClass({
+    mixins: [Navigation],
 	_onChange: function(){
         this.setState(getState());
+        if (LoginStore.getFeedback().status === 401) {
+            this.transitionTo('home');
+        }
     },
     getInitialState: function () {
-        return {feedback: '', authenticated: true, content: ''};
+        return getState();
     },
     componentDidMount: function() {
         AdminStore.addChangeListener(this._onChange);
         LoginStore.addChangeListener(this._onChange);
         LoginActions.authenticate();
+
         this.initTinyMCE();
     },
     componentWillUnmount: function() {
@@ -34,8 +40,12 @@ var AdminView = React.createClass({
         this.initTinyMCE();
     },
     render: function() {
+        var hidden = cx({
+            'hidden': LoginStore.getFeedback().message !== "Authorized"
+        });
+
         return (
-            <div>
+            <div className={hidden}>
                 <h1>Admin</h1>
                 <form onSubmit={this.savePost}>
                     <label>Title:</label>

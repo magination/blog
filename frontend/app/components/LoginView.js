@@ -21,14 +21,15 @@ var LoginView = React.createClass({
       LoginStore.addChangeListener(this._onChange);
     },
     render: function() {
+
         return (
             <div>
                 <h1> Log in or face termination! </h1>
                 <form onSubmit={this._login}>
                     <label htmlFor="username"> Username </label>
-                    <input type="text" ref="username" name="username"/>
+                    <input type="text" ref="username" name="username" required/>
                     <label htmlFor="password"> Password </label>
-                    <input type="password" ref="password" name="password"/>
+                    <input type="password" ref="password" name="password" required/>
                     <input type="submit" value="Login" />
                 </form>
                 <p>{this.state.userMessage}</p>

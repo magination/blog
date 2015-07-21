@@ -26,16 +26,16 @@ var LoginActions = {
         });
         LoginService.authenticate()
         .then(function(data){
-                Dispatcher.dispatch({
-                    actionType: BlogConstants.AUTHENTICATE_COMPLETED,
-                    data: data
-                });
-            }, function(error){
-                Dispatcher.dispatch({
-                    actionType: BlogConstants.AUTHENTICATE_ERROR,
-                    error: error
-                });
+            Dispatcher.dispatch({
+                actionType: BlogConstants.AUTHENTICATE_COMPLETED,
+                data: data
             });
+        }, function(error){
+            Dispatcher.dispatch({
+                actionType: BlogConstants.AUTHENTICATE_ERROR,
+                error: error
+            });
+        });
     }
 };
 
