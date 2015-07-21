@@ -13,29 +13,31 @@ function getState() {
 }
 
 var BlogPostView = React.createClass({
-    mixins: [ Router.State ],
-	_onChange: function(){
+    mixins: [Router.State],
+    _onChange: function () {
         this.setState(getState());
     },
-    componentDidMount: function() {
+    componentDidMount: function () {
         BlogStore.addChangeListener(this._onChange);
         BlogActions.fetch(this.getParams().id);
     },
-    componentWillUnmount: function() {
+    componentWillUnmount: function () {
         BlogStore.removeChangeListener(this._onChange);
     },
-    getInitialState: function() {
+    getInitialState: function () {
         return getState();
     },
-    render: function() {
+    render: function () {
         return (
             <div>
                 <Header />
-                <h1 className="blog-post-title">{this.state.title}</h1>
-                <h2> Written by: {this.state.author} </h2>
-                <div dangerouslySetInnerHTML={{__html: this.state.body}}/>
+                <div className="blog-post-container">
+                    <h1 className="blog-post-title">{this.state.title}</h1>
+                    <div className="written-by"> Written by: {this.state.author} </div>
+                    <div className="blog-body" dangerouslySetInnerHTML={{__html: this.state.body}}/>
+                </div>
             </div>
-            );
+        );
     }
 });
 
