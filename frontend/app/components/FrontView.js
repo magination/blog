@@ -6,6 +6,7 @@ var BlogActions = require("../actions/BlogActions");
 var PreviewBlogComponent = require('./PreviewBlogComponent');
 var Header = require('./Header');
 var lodash = require('lodash');
+var Footer = require('./Footer');
 
 function getState() {
     return {
@@ -45,6 +46,7 @@ var FrontView = React.createClass({
                         {previewList}
                         <Link to={"/admin"} className="create-blog-link">Create blog post</Link>
                     </div>
+                    <Footer />
                 </div>
             );
         }
