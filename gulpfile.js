@@ -8,7 +8,6 @@ var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
 var nodemon = require('nodemon');
 var _if = require('gulp-if');
@@ -24,66 +23,63 @@ less_dir = app_dir+'/styles',
 js_dir =  app_dir+'/app';
 
 gulp.task('tinymce', function(){
-	gulp.src(app_dir+'/tinymce/**/*.*')
+	return gulp.src(app_dir+'/tinymce/**/*.*')
 	.pipe(gulp.dest(dist_dir+'/tinymce'));
 });
 
 gulp.task('img', function(){
-	gulp.src(img_dir+'/**/*.*')
+	return gulp.src(img_dir+'/**/*.*')
 	.pipe(gulp.dest(dist_dir+'/img'));
 });
 
 gulp.task('less', function(){
-	gulp.src(less_dir+'/styles.less')
+	return gulp.src(less_dir+'/styles.less')
 	.pipe(less())
 	.pipe(gulp.dest(dist_dir+'/css/'));
 });
 
-function bundleJs(options){
-	options = options ? options:{};
-	if(!options.bundle){
-		options.bundle = browserify({
-			entries: js_dir+'/app.js',
-			transform: [reactify],
-			debug: true,
-			cache: {},
-			packageCache: {},
-			fullPaths: true
-		})
+function bundleJs(watch){
+	function bundle(b){
+		return b.bundle()
+			.pipe(source('app.bundle.js'))
+			.pipe(buffer())
+			.pipe(_if(isProduction, uglify()))
+			.on('error', gutil.log)
+			.on('end', function(){
+				return gutil.log('Finished compiling js');
+			}).pipe(gulp.dest(dist_dir+'/js'));
 	};
+	var b = browserify({
+		entries: js_dir+'/app.js',
+		transform: [reactify],
+		debug: !isProduction,
+		cache: {},
+		packageCache: {},
+		fullPaths: true
+	});
 
-	if(options.watch){
-		watchify(options.bundle)
-		.on('time', function(time){
-			gutil.log('Finished compiling js: ' + time + ' ms');
-		}).on('update', function(){
-			bundleJs({bundle:options.bundle});
+	if(watch) {
+		var w  = watchify(b);
+		w.on('update', function(){
+			return bundle(w);
 		});
+		return bundle(w);
 	}
-
-	return options.bundle.bundle()
-		.pipe(source('app.bundle.js'))
-		.pipe(buffer())
-		.pipe(_if(!isProduction, sourcemaps.init({loadMaps: true, debug: true})))
-		.pipe(uglify())
-		.pipe(_if(!isProduction, sourcemaps.write('./')))
-		.on('error', gutil.log)
-		.pipe(gulp.dest(dist_dir+'/js'));
-
+	return bundle(b);
 };
 
-gulp.task('js', function () {
+gulp.task('js', function(){
 	return bundleJs();
 });
 
 gulp.task('js:watch', function(){
-	return bundleJs({watch:true});
+	return bundleJs(true);
 });
 
 gulp.task('server', function () {
 	nodemon({
 		script: 'server.js',
-		ingore: [dist_dir, app_dir],
+		watch: ['server.js', 'routes/**', 'models/**'],
 		ext: 'js html',
 		env: { 'NODE_ENV': 'development' }
 	})
