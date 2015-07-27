@@ -56,6 +56,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.11.14",
     "react": "^0.13.3",
+    "react-g-analytics": "^0.1.0",
     "react-router": "^0.13.3",
     "slug": "^0.9.1",
     "superagent": "^0.21.0",
