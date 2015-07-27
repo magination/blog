@@ -13,11 +13,6 @@ require('./updates/init');
 
 var app = express();
 
-new user({username: "Juul", password: "KAKEmann123!", fullname: "Juul Arthur Ribe Rudihagen"}).save();
-new user({username: "Tobias", password: "KAKEmann123!", fullname: "Tobias Linkjendal"}).save();
-new user({username: "Hanna", password: "KAKEmann123!", fullname: "Hanna Aanjesen"}).save();
-new user({username: "Jorgen", password: "KAKEmann123!", fullname: "Jørgen Espnes"}).save();
-
 app.use(express.static(__dirname + '/static'));
 app.use(session({ 
 	secret: 'topsecret',
