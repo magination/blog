@@ -44,7 +44,6 @@ var FrontView = React.createClass({
                     <div className="postContainer">
                         <div className="clear-both"/>
                         {previewList}
-                        <Link to={"/admin"} className="create-blog-link">Create blog post</Link>
                     </div>
                     <Footer />
                 </div>
