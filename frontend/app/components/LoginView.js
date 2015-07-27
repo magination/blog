@@ -24,7 +24,7 @@ var LoginView = React.createClass({
 
         return (
             <div>
-                <h1> Log in or face termination! </h1>
+                <h1> Log in! </h1>
                 <form onSubmit={this._login}>
                     <label htmlFor="username"> Username </label>
                     <input type="text" ref="username" name="username" required/>
