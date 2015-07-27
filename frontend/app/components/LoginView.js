@@ -11,7 +11,7 @@ var LoginView = React.createClass({
         return {userMessage: ""};
     },
     _onChange: function(){
-        if (LoginStore.getFeedback().status === 200) {
+        if (LoginStore.getFeedback().ok) {
             this.transitionTo('admin');
         } else {
             this.setState({userMessage: LoginStore.getFeedback()});

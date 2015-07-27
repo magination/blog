@@ -14,6 +14,7 @@ passport.deserializeUser(function(id, done) {
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
+    if (!username) return done('No username specified');
     User.findOne({ username: username }, function (err, user) {
       if (err) { return done(err); }
       if (!user) return done('Incorrect username');
@@ -32,7 +33,7 @@ module.exports = function(req, res, next){
   passport.authenticate('local', function(err, user){
       if (err) {
         res.status(403);
-        return res.send({message: err});
+        return res.send(err);
       }
       req.logIn(user,next);
   })(req,res,next);

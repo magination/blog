@@ -13,12 +13,12 @@ var LoginActions = {
                     actionType: BlogConstants.LOGIN_COMPLETED,
                     data: data
                 });
-            }, function(error){
-                Dispatcher.dispatch({
-                    actionType: BlogConstants.LOGIN_ERROR,
-                    error: error
-                });
+        }).catch(function(error){
+            Dispatcher.dispatch({
+                actionType: BlogConstants.LOGIN_ERROR,
+                error: error
             });
+        });
     },
     authenticate: function(){
         Dispatcher.dispatch({
@@ -30,7 +30,7 @@ var LoginActions = {
                 actionType: BlogConstants.AUTHENTICATE_COMPLETED,
                 data: data
             });
-        }, function(error){
+        }).catch(function(error){
             Dispatcher.dispatch({
                 actionType: BlogConstants.AUTHENTICATE_ERROR,
                 error: error
