@@ -15,7 +15,7 @@ function loadBlog(data) {
     _title = data.title;
     _body = data.body;
     //todo: Fallback for testing purposes, remove when user system is stable
-    _author = data.author ? data.author.username : "Magination";
+    _author = data.author ? data.author.fullname : "Magination";
 }
 
 function fetchFailed(error) {
