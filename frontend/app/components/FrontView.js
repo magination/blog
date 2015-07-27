@@ -1,6 +1,5 @@
 var React = require("react");
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
+
 var AllBlogPostsStore = require("../stores/AllBlogPostsStore");
 var BlogActions = require("../actions/BlogActions");
 var PreviewBlogComponent = require('./PreviewBlogComponent');
@@ -29,31 +28,31 @@ var FrontView = React.createClass({
         return getState();
     },
     render: function () {
+        return (
+            <div className="SiteContainer">
+                <Header />
+                <div className="postContainer">
+                    <div className="clear-both"/>
+                    {this.previewList()}
+                </div>
+                <Footer />
+            </div>
+        );
+    },
+    previewList: function() {
         if (this.state.blogs[0]) {
             var previewList = [];
+
             for (var post in this.state.blogs) {
                 previewList.push(this.state.blogs[post]);
             }
-            previewList = lodash.map(previewList, function (post, key) {
+
+            return lodash.map(previewList, function (post, key) {
                 return <PreviewBlogComponent key={key} blogpost={post}/>;
             });
+        }
 
-            return (
-                <div className="SiteContainer">
-                    <Header />
-                    <div className="postContainer">
-                        <div className="clear-both"/>
-                        {previewList}
-                    </div>
-                    <Footer />
-                </div>
-            );
-        }
-        else {
-            return (
-                <div>
-                </div>);
-        }
+        return <div></div>;
     }
 });
 
