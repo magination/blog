@@ -35,7 +35,7 @@ var AdminView = React.createClass({
         LoginStore.addChangeListener(this._onChange);
         LoginActions.authenticate();
 
-        this.initTinyMCE();
+        setTimeout(this.initTinyMCE, 100);
     },
     componentWillUnmount: function() {
         AdminStore.removeChangeListener(this._onChange);
