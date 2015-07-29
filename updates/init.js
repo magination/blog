@@ -2,7 +2,7 @@ var Post = require('../models/post');
 var User = require('../models/user');
 var mongoose = require('mongoose');
 
-var initUser = new User({username:'test', password:'test'});
+var initUser = new User({username:'test', password:'test', fullname:'Riberull'});
 var bigBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
 Sed hendrerit nisl vitae venenatis congue. Aliquam erat volutpat. \
 Vestibulum ac dapibus odio. Nunc non diam pulvinar, efficitur turpis dignissim,\
