@@ -12,9 +12,9 @@ var Footer = React.createClass({
                     </ul>
                 </div>
                 <div className="socialMediaLinks">
-                    <li><a href="https://www.facebook.com/maginationgame"><img src="http://res.cloudinary.com/magination/image/upload/v1437503444/1437521335_Social_networks_Facebook_ei6bfp.svg"/></a></li>
-                    <li><a href="https://twitter.com/maginationgame"><img src="http://res.cloudinary.com/magination/image/upload/v1437503444/1437521344_Social_networks_Tumblr_tzgnax.svg"/></a></li>
-                    <li><a href="https://instagram.com/maginationgame/"><img src="http://res.cloudinary.com/magination/image/upload/v1437503444/1437521361_Social_networks_Instagram_toklmq.svg"/></a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/maginationgame"><img src="http://res.cloudinary.com/magination/image/upload/v1437503444/1437521335_Social_networks_Facebook_ei6bfp.svg"/></a></li>
+                    <li><a target="_blank" href="https://twitter.com/maginationgame"><img src="http://res.cloudinary.com/magination/image/upload/v1437503444/1437521344_Social_networks_Tumblr_tzgnax.svg"/></a></li>
+                    <li><a target="_blank" href="https://instagram.com/maginationgame/"><img src="http://res.cloudinary.com/magination/image/upload/v1437503444/1437521361_Social_networks_Instagram_toklmq.svg"/></a></li>
                 </div>
             </div>
         );
