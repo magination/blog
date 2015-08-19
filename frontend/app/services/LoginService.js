@@ -1,27 +1,25 @@
 var request = require('superagent');
-var requestHandler = require('./requestHandler');
 var Promise = require('bluebird');
+Promise.promisifyAll(request);
 
 var LoginService = {
     login: function (username, password) {
-        return new Promise(function (resolve, reject) {
-            request
-                .post('/login', {username: username, password: password})
-                .on('error', requestHandler.error(reject))
-                .end(function (err, res) {
-                    requestHandler.response(resolve, reject, err, res);
-                });
-        });
+        return request
+            .post('/login', {username: username, password: password})
+            .endAsync()
+            .then(function(res){
+                if (res.ok) {return res; }
+                throw res.text;
+            });
     },
     authenticate: function () {
-        return new Promise(function (resolve, reject) {
-            request
-                .get('/authenticate')
-                .on('error', requestHandler.error(reject))
-                .end(function (err, res) {
-                    requestHandler.response(resolve, reject, err, res);
-                });
-        });
+        return request
+            .get('/authenticate')
+            .endAsync()
+            .then(function (res) {
+                if (res.ok) {return res; }
+                throw res.text;
+            });
     }
 };
 

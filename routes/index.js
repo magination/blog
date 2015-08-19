@@ -8,42 +8,38 @@ var middleware = require('./middleware');
 
 
 module.exports = function(app){
-  baucis.rest('post')
-  .findBy('slug')
-  .request('collection','head post put delete', middleware.requireUser)
-  .query(function(req,res,next){
-    req.baucis.query.populate('author', '-password')
-    next();
-  });
+    baucis.rest('post')
+    .findBy('slug')
+    .request('collection','head post put delete', middleware.requireUser)
+    .query(function(req,res,next){
+        req.baucis.query.populate('author', '-password')
+        next();
+    });
 
-  baucis.rest('user').request(middleware.requireUser);
+    baucis.rest('user').request(middleware.requireUser);
 
-  router.post('/login', auth, function(req, res, next) {
-    if (req.user) {
-      res.status(200);
-      res.send({status: 200});
-      }
-  });
+    router.post('/login', auth, function(req, res, next) {
+        if (req.user) {
+            res.status(200);
+            res.send('Logged inn');
+        }
+    });
 
-  router.get('/logout', function(req, res){
-    req.logout();
-    res.status(200);
-    res.send({status: 200});
-  });
+    router.get('/logout', middleware.requireUser, function(req, res){
+        req.logout();
+        res.status(200);
+        res.send('Logged out');
+    });
 
-  router.get('/authenticate', function(req, res) {
-    if(!req.user) {
-      res.status(401);
-      return res.send({message: 'Unauthorized, please log in', status: 401});
-    } else {
-      return res.send({message: 'Authorized', userID: req.user.id})
-    }
-  });
+    router.get('/authenticate', middleware.requireUser, function(req, res) {
+        res.status(200);
+        return res.send(req.user);
+    });
 
-  app.use('/api', baucis());
+    app.use('/api', baucis());
 
-  router.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
-  });
-  return router;
+    router.get('*', function(req, res) {
+        res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+    });
+    return router;
 };
